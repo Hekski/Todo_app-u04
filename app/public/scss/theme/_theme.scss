@@ -1,0 +1,33 @@
+body {
+  background-color: rgb(203, 203, 203);
+}
+
+p {
+  margin-top: 2px;
+}
+
+.completed {
+  background-color: rgb(177, 177, 177);
+  color: rgb(0, 0, 0);
+}
+
+ul {
+  padding-inline-start: 0px;
+}
+
+li {
+  list-style-type: none;
+}
+
+input {
+  border: none;
+  margin-bottom: 0.2em;
+  border-radius: 6px;
+  height: 2rem;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color:rgb(31, 127, 187);
+}

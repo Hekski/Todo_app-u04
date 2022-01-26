@@ -1,0 +1,13 @@
+%align-center {
+  // @extend %align-center;
+  display: flex;
+  align-items: center;
+}
+
+%form {
+  max-width: 260px;
+  &--form {
+    display: flex;
+    flex-direction: column;
+  }
+}

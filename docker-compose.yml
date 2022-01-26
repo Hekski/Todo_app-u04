@@ -1,5 +1,5 @@
-version: '3'  
-services: 
+version: "3"
+services:
   web:
     image: nginx:latest
     ports:
@@ -11,18 +11,17 @@ services:
       - php
 
   php:
-    build:
-      php:fpm
+    build: php:fpm
     volumes:
       - ./app:/app
 
   mysql:
     image: mariadb:latest
     environment:
-      MYSQL_ROOT_PASSWORD: 'secret'
-      MYSQL_USER: 'henrik'
-      MYSQL_PASSWORD: 'secret'
-      MYSQL_DATABASE: 'henrikdb'
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_USER: "henrik"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "henrikdb"
     volumes:
       - mysqldata:/var/lib/mysql
 
