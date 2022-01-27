@@ -17,13 +17,13 @@ include_once "header.php";
                         <input class='submit' type='submit' name='submit' id='submit' value='Save It For Later!'>
                         </form>
                         <form action='/dodo.php' method='post'>
-                        <input class='submit' type='submit' id='submit' value='Take A Sneak At Your Thoughts..'>
+                        <input class='submit' type='submit' id='submit' value='Take A Sneak Peak At Your Thoughts..'>
                         </form>";
             if (isset($_GET["mess"]) && $_GET["mess"] == "noted") {
-              echo "Noted! Keep track in your personal to-do list";
+              echo "Noted! Keep track in your personal list of thoughts...";
             }
           } else {
-            echo "<h1>Welcome a sacret place to collect your thoughts!</h1>
+            echo "<h1>Welcome to a sacred place to collect your thoughts!</h1>
               <div class='index__login'>
                 <h4>Login here</h4>
                     <form class='index__login--form' action='/includes/login.inc.php' method='post'>
