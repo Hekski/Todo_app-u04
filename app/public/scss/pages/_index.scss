@@ -5,3 +5,10 @@
     flex-direction: column;
   }
 }
+
+.input-tasktext {
+  border: none;
+  border-radius: 4px;
+  resize: none;
+  font-family: inherit;
+}

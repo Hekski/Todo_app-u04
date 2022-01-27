@@ -1,9 +1,9 @@
 <?php
-include_once "includes/todo.inc.php";
 include_once "./db/connect.php";
-include_once "header.php";
+include_once "./includes/todo.inc.php";
+include_once "./header.php";
 
-choice($db);
+// choice($db);
 ?>
 
 <!DOCTYPE html>
@@ -23,13 +23,12 @@ choice($db);
           echo "<p>Welcome to your personal to-do list!</p>";
         } ?>
         <div class="add__section">
-            <form class="add__section--form" method="POST" action="todo.php">
+            <form class="add__section--form" method="POST" action="dodo.php">
                 <input id="newtask" type="submit" name="newtask" value="New Task">
 
                 <?php if (isset($_GET["mess"]) && $_GET["mess"] == "error") { ?>
                     <p>Please fill in both task and description!</p>
                 <?php } ?>
-
 
             </form>
         </div>
@@ -40,15 +39,6 @@ choice($db);
                 </ul>
 
         </section>            
-
-        <section class="completed__section">
-            <h2>Completed tasks:</h2>
-
-                <ul>
-                <?php echo printCompletedTasks($db); ?>
-                </ul>
-
-        </section> 
     </div>           
 </main>
 

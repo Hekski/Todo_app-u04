@@ -1,22 +1,34 @@
 <?php
-require_once "todo.functions.inc.php";
+include_once "todo.functions.inc.php";
 
-function choice($db)
-{
-  if (isset($_POST["newtask"])) {
-    newtask($db);
-    /*     header("Refresh:0");
-     die(); */
-  }
-  if (isset($_POST["update"])) {
-    update($db);
-  }
+if (isset($_POST["newtask"])) {
+  newtask($db, $id);
+}
 
-  if (isset($_POST["delete"])) {
-    delete($db);
-  }
+if (isset($_POST["submit"])) {
+  $task = $_POST["task"];
+  $tasktext = $_POST["tasktext"];
 
-  if (isset($_POST["complete"])) {
-    complete($db);
+  if (emptyInputSubmit($task, $tasktext) !== false) {
+    header("location: ../index.php?error=emptyinput");
+  } else {
+    submit($db, $id);
   }
 }
+
+if (isset($_POST["update"])) {
+  update($db);
+}
+
+if (isset($_POST["delete"])) {
+  delete($db);
+}
+
+if (isset($_POST["deleteAll"])) {
+  deleteAll($db);
+}
+
+if (isset($_POST["complete"])) {
+  complete($db);
+}
+?>

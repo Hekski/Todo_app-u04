@@ -1,13 +1,45 @@
 <?php
 
-function newtask($db)
+function emptyInputSubmit($task, $tasktext)
 {
-  // Add task to database with userID
-  $query =
-    "INSERT INTO tasklist (task, tasktext, taskid, completed) VALUES ('', '', '0', '0')";
-  $stmt = $db->prepare($query);
+  $result = false;
+  if (empty($task) || empty($tasktext)) {
+    $result = true;
+  }
+  return $result;
+}
+
+//
+
+function submit($db, $id)
+{
+  $task = $_POST["task"];
+  $tasktext = $_POST["tasktext"];
+
+  if (empty($task)) {
+    header("Location: ../index.php?mess=error");
+  } elseif ($task && $tasktext) {
+    $stmt = $db->prepare(
+      "INSERT INTO tasklist (taskid, task, tasktext, completed) VALUES ('$id','$task', '$tasktext', '0')"
+    );
+    $stmt->execute();
+    header("Location: ../index.php?mess=noted");
+  }
+}
+
+// Add new task to database with userID
+
+function newtask($db, $id)
+{
+  $id = $_SESSION["users_id"];
+
+  $stmt = $db->prepare(
+    "INSERT INTO tasklist (task, tasktext, taskid, completed) VALUES ('', '', '$id', '0')"
+  );
   $stmt->execute();
 }
+
+//
 
 function update($db)
 {
@@ -15,21 +47,26 @@ function update($db)
   $tasktext = $_POST["tasktext"];
   $id = $_POST["id"];
 
-  $query =
-    "UPDATE tasklist SET task = :task, tasktext = :tasktext WHERE id = :id";
-  $stmt = $db->prepare($query);
-  $stmt->execute([
-    "task" => $task,
-    "tasktext" => $tasktext,
-    "id" => $id,
-  ]);
+  $stmt = $db->prepare(
+    "UPDATE tasklist SET task = :task, tasktext = :tasktext WHERE id = :id"
+  );
+  try {
+    $stmt->execute([
+      "task" => $task,
+      "tasktext" => $tasktext,
+      "id" => $id,
+    ]);
+  } catch (Exception $e) {
+    echo "Fel!" . $e->getMessage();
+  }
 }
+
+//
 
 function complete($db)
 {
   $id = $_POST["id"];
-  $query = "UPDATE tasklist SET completed = 1 WHERE id = :id";
-  $stmt = $db->prepare($query);
+  $stmt = $db->prepare("UPDATE tasklist SET completed = 1 WHERE id = :id");
 
   try {
     $stmt->execute(["id" => $id]);
@@ -43,8 +80,7 @@ function complete($db)
 function delete($db)
 {
   $id = $_POST["id"];
-  $query = "DELETE FROM tasklist WHERE id = :id";
-  $stmt = $db->prepare($query);
+  $stmt = $db->prepare("DELETE FROM tasklist WHERE id = :id");
 
   try {
     $stmt->execute(["id" => $id]);
@@ -53,49 +89,66 @@ function delete($db)
   }
 }
 
-//
+function deleteAll($db)
+{
+  $stmt = $db->prepare("DELETE FROM tasklist WHERE completed = 1");
+
+  try {
+    $stmt->execute($stmt);
+  } catch (Exception $e) {
+    echo "Fel!" . $e->getMessage();
+  }
+}
+
+// Move item up
+
+// Move item down
+
+// Print current tasks
 
 function printTasks($db)
 {
-  $query = "SELECT * FROM tasklist WHERE completed = 0 ORDER BY id";
-  $stmt = $db->prepare($query);
+  $stmt = $db->prepare(
+    "SELECT * FROM tasklist WHERE completed = 0 ORDER BY id"
+  );
   $stmt->execute();
   $result = $stmt->fetchAll();
 
   $listNumber = 1;
 
   foreach ($result as $task) {
-    $listitem = "<li><form method='POST' action='todo.php'>
-            $listNumber<input name='id' type='hidden' value='$task[id]'>
+    $listitem = "<div class='listitem'>$listNumber<li><form method='POST' action='dodo.php'>
+            <input name='id' type='hidden' value='$task[id]'>
             <input class='input-task' name='task' type='text' value='$task[task]' placeholder='Task'><br>
             <input class='input-tasktext' name='tasktext' type='text' value='$task[tasktext]' placeholder='Description'><br>
-            <input type='submit' name='update' value='Update'>
-            <input type='submit' name='delete' value='Delete'>
-            <input type='submit' name='complete' value='Complete'>
-            <input type='button' name='moveUp' value='↑'>
-            <input type='button' name='moveDown' value='↓'>
+            <input class='submit' type='submit' name='update' value='Update'>
+            <input class='submit' type='submit' name='delete' value='Delete'>
+            <input class='submit' type='submit' name='complete' value='Complete'>
+            <input class='submit' type='button' name='moveUp' value='↑'>
+            <input class='submit' type='button' name='moveDown' value='↓'>
         </form>
-        </li>";
+        </li></div>";
     echo $listitem;
     $listNumber++;
   }
 }
 
+// Print completed tasks
+
 function printCompletedTasks($db)
 {
-  $query = "SELECT * FROM tasklist WHERE completed = 1";
-  $stmt = $db->prepare($query);
+  $stmt = $db->prepare("SELECT * FROM tasklist WHERE completed = 1");
   $stmt->execute();
   $result = $stmt->fetchAll();
 
   $listNumber = 1;
 
   foreach ($result as $task) {
-    $listitem = "<li><form method='POST' action='todo.php'>
+    $listitem = "<li><form method='POST' action='completed.php'>
             $listNumber<input name='id' type='hidden' value='$task[id]'>
             <input class='completed' name='task' type='text' value='$task[task]'>
             <input class='completed' name='tasktext' type='text' value='$task[tasktext]'>
-            <input type='submit' name='delete' value='Delete'>
+            <input class='submit' type='submit' name='delete' value='Delete'>
         </form>
         </li>";
     echo $listitem;

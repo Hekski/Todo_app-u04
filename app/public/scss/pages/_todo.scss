@@ -17,12 +17,22 @@
 .input-task {
   width: 100%;
   font-weight: bold;
+  font-size: 1.5em;
+  background-color: transparent;
 }
 
 .input-tasktext {
   width: 100%;
+  background-color: transparent;
 }
 
 .user_name {
   font-weight: bold;
+}
+
+.listitem {
+  background-color: white;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  padding: 4px;
 }

@@ -1,28 +1,30 @@
 <?php
-
+session_destroy();
+session_start();
+$id = $_SESSION["users_id"];
 
 // Login functions
 
-function emptyInputLogin($uid, $pwd) {
+function emptyInputLogin($uid, $pwd)
+{
   $result = false;
   if (empty($uid) || empty($pwd)) {
     $result = true;
-  } 
+  }
   return $result;
 }
 
-function login($db, $uid, $pwd) {
+function login($db, $uid, $pwd)
+{
   $uidExists = uidExists($db, $uid, $uid);
-  
+
   if ($uidExists === false) {
     header("location: ../index.php?error=wronglogin");
     exit();
   }
   $pwdHashed = $uidExists["users_pwd"];
   $checkPwd = password_verify($pwd, $pwdHashed);
-  
-  getUserId($db);
- 
+
   if ($checkPwd === false) {
     header("location: ../index.php?error=wronglogin");
     exit();
@@ -30,27 +32,34 @@ function login($db, $uid, $pwd) {
     session_start();
     $_SESSION["users_id"] = $uidExists["users_id"];
     $_SESSION["users_uid"] = $uidExists["users_uid"];
-    header("location: ../todo.php");
+    getUserId($db);
+    header("location: ../index.php");
     exit();
   }
 }
 
-function getUserId($db) {
-  $id= $_SESSION['users_id'];
-  $stmt = $db->prepare("SELECT * FROM users WHERE users_id=:id");
-  $stmt->bindParam(':id', $id);
-  $stmt->execute();
-  print_r($id);
-  
+function getUserId($db)
+{
+  if (isset($_SESSION["users_id"])) {
+    $id = $_SESSION["users_id"];
+    echo $_SESSION["users_id"];
+    $stmt = $db->prepare("SELECT * FROM users WHERE users_id=:id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    echo $_SESSION["users_id"];
+    return $id;
+  }
 }
 
 // Signup functions
 
-function uidExists($db, $uid, $email) {
-  $query =
-    "SELECT * FROM users WHERE users_uid = :users_uid OR users_uid = :users_email;";
-
-  if (!($stmt = $db->prepare($query))) {
+function uidExists($db, $uid, $email)
+{
+  if (
+    !($stmt = $db->prepare(
+      "SELECT * FROM users WHERE users_uid = :users_uid OR users_uid = :users_email;"
+    ))
+  ) {
     header("location: ../pages/signup.php?error=stmtfailed");
     exit();
   }
@@ -64,8 +73,9 @@ function uidExists($db, $uid, $email) {
   }
 }
 
-function emptyInputSignup($uid, $pwd, $pwdRepeat, $email) {
-  $result = NULL;
+function emptyInputSignup($uid, $pwd, $pwdRepeat, $email)
+{
+  $result = null;
   if (empty($uid) || empty($pwd) || empty($pwdRepeat) || empty($email)) {
     $result = true;
   } else {
@@ -74,8 +84,9 @@ function emptyInputSignup($uid, $pwd, $pwdRepeat, $email) {
   return $result;
 }
 
-function invalidUid($uid) {
-  $result = NULL;
+function invalidUid($uid)
+{
+  $result = null;
   if (!preg_match("/^[a-zA-Z0-9]*$/", $uid)) {
     $result = true;
   } else {
@@ -84,8 +95,9 @@ function invalidUid($uid) {
   return $result;
 }
 
-function invalidEmail($email) {
-  $result = NULL;
+function invalidEmail($email)
+{
+  $result = null;
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $result = true;
   } else {
@@ -94,8 +106,9 @@ function invalidEmail($email) {
   return $result;
 }
 
-function pwdMatch($pwd, $pwdRepeat) {
-  $result = NULL;
+function pwdMatch($pwd, $pwdRepeat)
+{
+  $result = null;
   if ($pwd !== $pwdRepeat) {
     $result = true;
   } else {
@@ -104,14 +117,15 @@ function pwdMatch($pwd, $pwdRepeat) {
   return $result;
 }
 
-
-
-function createUser($db, $email, $username, $pwd) {
+function createUser($db, $email, $username, $pwd)
+{
   $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-  $query =
-    "INSERT INTO users (users_uid, users_pwd, users_email) VALUES (:usersUid, :usersPwd, :usersEmail);";
-  if (!($stmt = $db->prepare($query))) {
+  if (
+    !($stmt = $db->prepare(
+      "INSERT INTO users (users_uid, users_pwd, users_email) VALUES (:usersUid, :usersPwd, :usersEmail);"
+    ))
+  ) {
     header("location: ../pages/signup.php?error=stmtfailed");
     exit();
   }
