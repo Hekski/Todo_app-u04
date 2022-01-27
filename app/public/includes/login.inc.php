@@ -13,7 +13,6 @@ if (isset($_POST["submit"])) {
     exit();
   }
   login($db, $uid, $pwd);
-  
 } else {
   header("location: ../index.php?error=wronglogin");
   exit();

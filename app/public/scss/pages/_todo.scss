@@ -1,24 +1,18 @@
+.login {
+  display: flex;
+  justify-content: center;
+}
+
 .wrapper {
-  max-width: 400px;
-}
-
-.add__section {
-  width: 100%;
-}
-
-.todo__section {
-  width: 100%;
-}
-
-.completed__section {
-  width: 100%;
+  width: 60%;
 }
 
 .input-task {
   width: 100%;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 2em;
   background-color: transparent;
+  padding: 0.5em;
 }
 
 .input-tasktext {
@@ -35,4 +29,5 @@
   border-radius: 12px;
   margin-bottom: 10px;
   padding: 4px;
+  filter: drop-shadow(10px 10px 10px #f0afea);
 }

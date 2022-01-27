@@ -12,7 +12,7 @@ session_start(); ?>
 </head>
 
 <nav>
-  <div class="wrapper">
+  <div class="nav">
 
     <ul>
       <?php if (isset($_SESSION["users_id"])) {

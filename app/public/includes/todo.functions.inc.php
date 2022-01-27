@@ -11,7 +11,7 @@ function emptyInputSubmit($task, $tasktext)
 
 //
 
-function submit($db, $id)
+function submit($db)
 {
   $task = $_POST["task"];
   $tasktext = $_POST["tasktext"];
@@ -20,7 +20,7 @@ function submit($db, $id)
     header("Location: ../index.php?mess=error");
   } elseif ($task && $tasktext) {
     $stmt = $db->prepare(
-      "INSERT INTO tasklist (taskid, task, tasktext, completed) VALUES ('$id','$task', '$tasktext', '0')"
+      "INSERT INTO tasklist (taskid, task, tasktext, completed) VALUES ('0','$task', '$tasktext', '0')"
     );
     $stmt->execute();
     header("Location: ../index.php?mess=noted");
@@ -31,8 +31,6 @@ function submit($db, $id)
 
 function newtask($db, $id)
 {
-  $id = $_SESSION["users_id"];
-
   $stmt = $db->prepare(
     "INSERT INTO tasklist (task, tasktext, taskid, completed) VALUES ('', '', '$id', '0')"
   );
@@ -117,7 +115,8 @@ function printTasks($db)
   $listNumber = 1;
 
   foreach ($result as $task) {
-    $listitem = "<div class='listitem'>$listNumber<li><form method='POST' action='dodo.php'>
+    if ($task["taskid"] == $_SESSION["users_id"]) {
+      $listitem = "<div class='listitem'>$listNumber<li><form method='POST' action='dodo.php'>
             <input name='id' type='hidden' value='$task[id]'>
             <input class='input-task' name='task' type='text' value='$task[task]' placeholder='Task'><br>
             <input class='input-tasktext' name='tasktext' type='text' value='$task[tasktext]' placeholder='Description'><br>
@@ -128,8 +127,9 @@ function printTasks($db)
             <input class='submit' type='button' name='moveDown' value='↓'>
         </form>
         </li></div>";
-    echo $listitem;
-    $listNumber++;
+      echo $listitem;
+      $listNumber++;
+    }
   }
 }
 

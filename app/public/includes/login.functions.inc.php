@@ -1,8 +1,4 @@
 <?php
-session_destroy();
-session_start();
-$id = $_SESSION["users_id"];
-
 // Login functions
 
 function emptyInputLogin($uid, $pwd)
@@ -13,45 +9,6 @@ function emptyInputLogin($uid, $pwd)
   }
   return $result;
 }
-
-function login($db, $uid, $pwd)
-{
-  $uidExists = uidExists($db, $uid, $uid);
-
-  if ($uidExists === false) {
-    header("location: ../index.php?error=wronglogin");
-    exit();
-  }
-  $pwdHashed = $uidExists["users_pwd"];
-  $checkPwd = password_verify($pwd, $pwdHashed);
-
-  if ($checkPwd === false) {
-    header("location: ../index.php?error=wronglogin");
-    exit();
-  } elseif ($checkPwd === true) {
-    session_start();
-    $_SESSION["users_id"] = $uidExists["users_id"];
-    $_SESSION["users_uid"] = $uidExists["users_uid"];
-    getUserId($db);
-    header("location: ../index.php");
-    exit();
-  }
-}
-
-function getUserId($db)
-{
-  if (isset($_SESSION["users_id"])) {
-    $id = $_SESSION["users_id"];
-    echo $_SESSION["users_id"];
-    $stmt = $db->prepare("SELECT * FROM users WHERE users_id=:id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    echo $_SESSION["users_id"];
-    return $id;
-  }
-}
-
-// Signup functions
 
 function uidExists($db, $uid, $email)
 {
@@ -72,6 +29,45 @@ function uidExists($db, $uid, $email)
     return $result;
   }
 }
+
+function getUserId()
+{
+  if (isset($_SESSION["users_id"])) {
+    $id = $_SESSION["users_id"];
+    // echo $_SESSION["users_id"];
+    /*$stmt = $db->prepare("SELECT * FROM users WHERE users_id=:id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    echo $_SESSION["users_id"]; */
+    return $id;
+  }
+}
+
+function login($db, $uid, $pwd)
+{
+  $uidExists = uidExists($db, $uid, $uid);
+
+  if ($uidExists === false) {
+    header("location: ../index.php?error=wronglogin");
+    exit();
+  }
+  $pwdHashed = $uidExists["users_pwd"];
+  $checkPwd = password_verify($pwd, $pwdHashed);
+
+  if ($checkPwd === false) {
+    header("location: ../index.php?error=wronglogin");
+    exit();
+  } elseif ($checkPwd === true) {
+    session_start();
+    $_SESSION["users_id"] = $uidExists["users_id"];
+    $_SESSION["users_uid"] = $uidExists["users_uid"];
+    getUserId();
+    header("location: ../index.php");
+    exit();
+  }
+}
+
+// Signup functions
 
 function emptyInputSignup($uid, $pwd, $pwdRepeat, $email)
 {

@@ -1,8 +1,10 @@
 <?php
+// session_start();
 include_once "todo.functions.inc.php";
+// include_once "../header.php";
 
 if (isset($_POST["newtask"])) {
-  newtask($db, $id);
+  newtask($db, $_SESSION["users_id"]);
 }
 
 if (isset($_POST["submit"])) {
@@ -12,7 +14,7 @@ if (isset($_POST["submit"])) {
   if (emptyInputSubmit($task, $tasktext) !== false) {
     header("location: ../index.php?error=emptyinput");
   } else {
-    submit($db, $id);
+    submit($db);
   }
 }
 

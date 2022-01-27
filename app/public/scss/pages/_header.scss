@@ -1,9 +1,10 @@
 .nav {
-  background-color: transparent;
+  width: 800px;
+  font-style: bolder;
 }
 
 .navbar {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }

@@ -4,19 +4,20 @@ include_once "./includes/todo.inc.php";
 include_once "header.php";
 ?>
 <body>
-    <section class="login">
+  
         <div class="wrapper">
+          <div class="moon"></div>
           
           <?php
           if (isset($_SESSION["users_id"])) {
-            echo "<h1>Something on your mind?</h1>
+            echo "<h1>Something on your weary mind?</h1>
             <div class='listitem'><form class='index__login--form' action='index.php' method='post'>
-                        <input class='input-task' type='text' name='task' placeholder='Task'>
-                        <textarea class='input-tasktext' rows='5' type='text' name='tasktext' placeholder='Description'></textarea><br></div>
-                        <input class='submit' type='submit' name='submit' id='submit' value='Submit To Todo-List!'>
+                        <input class='input-task' type='text' name='task' placeholder='Write it down!'>
+                        <textarea class='input-tasktext' rows='5' type='text' name='tasktext' placeholder='... and in more detail!'></textarea><br></div>
+                        <input class='submit' type='submit' name='submit' id='submit' value='Save It For Later!'>
                         </form>
                         <form action='/dodo.php' method='post'>
-                        <input class='submit' type='submit' id='submit' value='All Your Todos'>
+                        <input class='submit' type='submit' id='submit' value='Take A Sneak At Your Thoughts..'>
                         </form>";
             if (isset($_GET["mess"]) && $_GET["mess"] == "noted") {
               echo "Noted! Keep track in your personal to-do list";
@@ -41,7 +42,7 @@ include_once "header.php";
             </div>
         </div>
         
-    </section>
+  
     
 
 </body>
