@@ -1,5 +1,7 @@
 <?php
 
+// Checking for empty submit fields
+
 function emptyInputSubmit($task, $tasktext)
 {
   $result = false;
@@ -9,7 +11,7 @@ function emptyInputSubmit($task, $tasktext)
   return $result;
 }
 
-//
+// submit funktion for welcome page (Must fix: Doesnt send personal input to db)
 
 function submit($db)
 {
@@ -37,7 +39,7 @@ function newtask($db, $id)
   $stmt->execute();
 }
 
-//
+// Update/confirm input in "My thoughts"
 
 function update($db)
 {
@@ -59,7 +61,7 @@ function update($db)
   }
 }
 
-//
+// Send thoughts to "Finished thoughts"
 
 function complete($db)
 {
@@ -73,7 +75,7 @@ function complete($db)
   }
 }
 
-//
+// Delete thoughts from "My thoughts"
 
 function delete($db)
 {
@@ -87,6 +89,8 @@ function delete($db)
   }
 }
 
+// Delete all old thoughts (Must fix: Not working)
+
 function deleteAll($db)
 {
   $stmt = $db->prepare("DELETE FROM tasklist WHERE completed = 1");
@@ -98,11 +102,11 @@ function deleteAll($db)
   }
 }
 
-// Move item up
+// Must fix - Move item up - Function for prioritizing
 
-// Move item down
+// MMust fix - Move item down - Function for prioritizing
 
-// Print current tasks
+// Print current thoughts
 
 function printTasks($db)
 {
@@ -118,8 +122,8 @@ function printTasks($db)
     if ($task["taskid"] == $_SESSION["users_id"]) {
       $listitem = "<div class='listitem'>$listNumber<li><form method='POST' action='dodo.php'>
             <input name='id' type='hidden' value='$task[id]'>
-            <input class='input-task' name='task' type='text' value='$task[task]' placeholder='Task'><br>
-            <input class='input-tasktext' name='tasktext' type='text' value='$task[tasktext]' placeholder='Description'><br>
+            <input class='input-task' name='task' type='text' value='$task[task]' placeholder='Thought...'><br>
+            <input class='input-tasktext' name='tasktext' type='text' value='$task[tasktext]' placeholder='  And Insight...'><br>
             <input class='submit' type='submit' name='update' value='Update'>
             <input class='submit' type='submit' name='delete' value='Delete'>
             <input class='submit' type='submit' name='complete' value='Complete'>
@@ -133,7 +137,7 @@ function printTasks($db)
   }
 }
 
-// Print completed tasks
+// Print completed thoughts
 
 function printCompletedTasks($db)
 {

@@ -7,7 +7,7 @@ include_once "header.php";
   
         <div class="wrapper">
           <div class="moon"></div>
-          
+          <!-- Login or welcome page with a thoughts sketchpad -->
           <?php
           if (isset($_SESSION["users_id"])) {
             echo "<h1>Something on your weary mind?</h1>
@@ -23,13 +23,13 @@ include_once "header.php";
               echo "Noted! Keep track in your personal to-do list";
             }
           } else {
-            echo "<h1>Welcome to an todo-app for your tasks!</h1>
+            echo "<h1>Welcome a sacret place to collect your thoughts!</h1>
               <div class='index__login'>
                 <h4>Login here</h4>
                     <form class='index__login--form' action='/includes/login.inc.php' method='post'>
                         <input type='text' name='uid' placeholder='Username/E-mail'>
                         <input type='password' name='pwd' placeholder='Password'><br>
-                        <input type='submit' name='submit' id='submit' value='Submit'>
+                        <input class='submit' type='submit' name='submit' id='submit' value='Submit'>
                         </form>";
           }
           if (isset($_GET["error"]) && $_GET["error"] == "emptyinput") {

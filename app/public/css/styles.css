@@ -17,6 +17,10 @@ body {
 
 .submit {
   cursor: pointer;
+  background-color: #3f7db5;
+  color: white;
+  border-radius: 12px;
+  font-weight: bold;
 }
 
 a {
@@ -93,6 +97,7 @@ a {
 
 .wrapper {
   width: 60%;
+  max-width: 1100px;
 }
 
 .input-task {
@@ -115,10 +120,15 @@ a {
 .listitem {
   background-color: white;
   border-radius: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   padding: 4px;
   -webkit-filter: drop-shadow(10px 10px 10px #f0afea);
           filter: drop-shadow(10px 10px 10px #f0afea);
+}
+
+#newtask {
+  color: white;
+  font-weight: bold;
 }
 
 body {
@@ -150,7 +160,7 @@ p {
 }
 
 .completed {
-  background-color: #b1b1b1;
+  background-color: #84bced;
   color: black;
 }
 

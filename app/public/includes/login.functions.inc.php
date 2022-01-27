@@ -10,6 +10,8 @@ function emptyInputLogin($uid, $pwd)
   return $result;
 }
 
+// Checking uid and fetching a users row of info from db
+
 function uidExists($db, $uid, $email)
 {
   if (
@@ -30,18 +32,18 @@ function uidExists($db, $uid, $email)
   }
 }
 
+// Get user id
+
 function getUserId()
 {
   if (isset($_SESSION["users_id"])) {
     $id = $_SESSION["users_id"];
-    // echo $_SESSION["users_id"];
-    /*$stmt = $db->prepare("SELECT * FROM users WHERE users_id=:id");
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    echo $_SESSION["users_id"]; */
+
     return $id;
   }
 }
+
+// Login and password functions
 
 function login($db, $uid, $pwd)
 {

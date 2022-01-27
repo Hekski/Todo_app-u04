@@ -3,7 +3,6 @@ include_once "./db/connect.php";
 include_once "./header.php";
 include_once "./includes/login.functions.inc.php";
 $id = getUserId();
-$id = intval($id);
 include_once "./includes/todo.inc.php";
 
 // choice($db);
@@ -19,14 +18,15 @@ include_once "./includes/todo.inc.php";
     <title>To-do App</title>
 </head>
 <body>
+    <!-- CRUD o´ thoughts -->
     <div class="wrapper">
         <?php if (isset($_SESSION["users_uid"])) {
           echo '<h1 class="user_name">' . $_SESSION["users_uid"] . "!</h1>";
-          echo "<p>Welcome to your personal to-do list!</p>";
+          echo "<p>This is your beautiful collective of thoughts...</p>";
         } ?>
         <div class="add__section">
             <form class="add__section--form" method="POST" action="dodo.php">
-                <input id="newtask" type="submit" name="newtask" value="New Task">
+                <input id="newtask" type="submit" name="newtask" value="> New Thought <">
 
                 <?php if (isset($_GET["mess"]) && $_GET["mess"] == "error") { ?>
                     <p>Please fill in both task and description!</p>
@@ -34,7 +34,7 @@ include_once "./includes/todo.inc.php";
 
             </form>
         </div>
-        
+        <!-- Rendering of thoughts -->
         <section class="todo__section">
                 <ul>
                 <?php echo printTasks($db); ?>

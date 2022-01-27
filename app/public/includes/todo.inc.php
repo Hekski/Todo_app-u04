@@ -1,8 +1,7 @@
 <?php
-// session_start();
 include_once "todo.functions.inc.php";
-// include_once "../header.php";
 
+// Function and button triggers/listeners
 if (isset($_POST["newtask"])) {
   newtask($db, $_SESSION["users_id"]);
 }
