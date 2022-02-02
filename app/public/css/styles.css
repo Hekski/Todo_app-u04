@@ -4,23 +4,29 @@ body {
   font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
 }
 
-#newtask {
-  width: 100%;
-  background-color: #3f7db5;
+.button {
   cursor: pointer;
-}
-
-#deleteAll {
-  width: 100%;
-  cursor: pointer;
-}
-
-.submit {
-  cursor: pointer;
-  background-color: #3f7db5;
+  background-color: #799ff1;
   color: white;
-  border-radius: 12px;
+  border-radius: 6px;
   font-weight: bold;
+  font-size: 1.1em;
+  height: 40px;
+  padding: 0 8px 0 8px;
+  -webkit-box-shadow: 0px 5px #4d679e;
+          box-shadow: 0px 5px #4d679e;
+}
+
+.button:hover {
+  background-color: #93b2f5;
+}
+
+.button:active {
+  background-color: #648ee7;
+  -webkit-box-shadow: 0 3px #2a4581;
+          box-shadow: 0 3px #2a4581;
+  -webkit-transform: translateY(4px);
+          transform: translateY(4px);
 }
 
 a {
@@ -65,7 +71,7 @@ a {
 }
 
 .input-tasktext {
-  font-size: 1.2em;
+  font-size: 1.8em;
   border: none;
   border-radius: 4px;
   resize: none;
@@ -101,16 +107,19 @@ a {
 }
 
 .input-task {
-  width: 100%;
+  width: 96%;
   font-weight: bold;
   font-size: 2em;
-  background-color: transparent;
+  background-color: #ebebeb;
   padding: 0.5em;
+  color: #ba6ee9;
 }
 
 .input-tasktext {
   width: 100%;
   background-color: transparent;
+  color: #ba6ee9;
+  margin-bottom: 12px;
 }
 
 .user_name {
@@ -121,9 +130,7 @@ a {
   background-color: white;
   border-radius: 12px;
   margin-bottom: 14px;
-  padding: 4px;
-  -webkit-filter: drop-shadow(10px 10px 10px #f0afea);
-          filter: drop-shadow(10px 10px 10px #f0afea);
+  padding: 8px;
 }
 
 #newtask {
@@ -132,8 +139,9 @@ a {
 }
 
 body {
-  background: #db2bc8;
-  background: radial-gradient(circle, #f161e3 0%, #ffe6ff 48%, #00d4ff 100%);
+  background: #8a38a5;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(18%, #747b9e), color-stop(29%, #e08b90), color-stop(44%, #fed3b9), to(#aad6ff));
+  background: linear-gradient(0deg, #747b9e 18%, #e08b90 29%, #fed3b9 44%, #aad6ff 100%);
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -145,23 +153,44 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 100%;
+}
+
+::-webkit-input-placeholder {
+  color: #b6b6b6;
+}
+
+:-ms-input-placeholder {
+  color: #b6b6b6;
+}
+
+::-ms-input-placeholder {
+  color: #b6b6b6;
+}
+
+::placeholder {
+  color: #b6b6b6;
 }
 
 h1 {
   font-size: 6em;
-  background: -webkit-linear-gradient(#eee, #648ee7);
+  background: -webkit-linear-gradient(340deg, #eee, #7e9fe7);
   -webkit-background-clip: text;
+  background-clip: none;
   -webkit-text-fill-color: transparent;
+  -webkit-margin-after: 0.4em;
+          margin-block-end: 0.4em;
 }
 
 p {
   margin-top: 2px;
-  color: #3f7db5;
+  color: #f0f0f0;
 }
 
 .completed {
   background-color: #84bced;
   color: black;
+  height: 40px;
 }
 
 ul {
@@ -183,17 +212,6 @@ input {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: #3f7db5;
-}
-
-.moon {
-  opacity: 0.7;
-  margin-top: 1em;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  -webkit-box-shadow: inset 0 0 50px #fff, inset 20px 0 80px #f0f, inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
-          box-shadow: inset 0 0 50px #fff, inset 20px 0 80px #f0f, inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff, 0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
-  z-index: -10;
+  color: #ebebeb;
 }
 /*# sourceMappingURL=styles.css.map */

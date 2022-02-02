@@ -2,10 +2,7 @@
 include_once "./db/connect.php";
 include_once "./header.php";
 include_once "./includes/login.functions.inc.php";
-$id = getUserId();
 include_once "./includes/todo.inc.php";
-
-// choice($db);
 ?>
 
 <!DOCTYPE html>
@@ -21,12 +18,14 @@ include_once "./includes/todo.inc.php";
     <!-- CRUD o´ thoughts -->
     <div class="wrapper">
         <?php if (isset($_SESSION["users_uid"])) {
-          echo '<h1 class="user_name">' . $_SESSION["users_uid"] . "!</h1>";
-          echo "<p>This is your beautiful collective of thoughts...</p>";
+          echo '<h1 class="user_name">' .
+            $_SESSION["users_uid"] .
+            ", y☀ur thoughts</h1>";
         } ?>
+
         <div class="add__section">
             <form class="add__section--form" method="POST" action="dodo.php">
-                <input id="newtask" type="submit" name="newtask" value="> New Thought <">
+                <input class="button" type="submit" name="newtask" value="New Thought">
 
                 <?php if (isset($_GET["mess"]) && $_GET["mess"] == "error") { ?>
                     <p>Please fill in both task and description!</p>

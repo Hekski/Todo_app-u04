@@ -4,14 +4,13 @@ include_once "../header.php"; ?>
 <body>
     <div class="signup__login">
         <h1>Sign up</h1>
-        <p>sign up here!</p>
             <form class="signup__login--form" action="../includes/signup.inc.php" method="post">
                 <input type="text" name="uid" placeholder="Username">
                 <input type="password" name="pwd" placeholder="Password">
                 <input type="password" name="pwdRepeat" placeholder="Password again">
                 <input type="text" name="email" placeholder="E-mail">
                 <br>
-                <input type="submit" name="submit" id="submit" value="Submit">
+                <input class="button" type="submit" name="submit" id="submit" value="Submit">
             </form>
 
             <!-- Errorhandlers -->

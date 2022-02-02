@@ -6,14 +6,19 @@ if (isset($_POST["newtask"])) {
   newtask($db, $_SESSION["users_id"]);
 }
 
+if (isset($_POST["deleteAll"])) {
+  deleteAll($db);
+}
+
 if (isset($_POST["submit"])) {
   $task = $_POST["task"];
   $tasktext = $_POST["tasktext"];
 
   if (emptyInputSubmit($task, $tasktext) !== false) {
-    header("location: ../index.php?error=emptyinput");
+    $_SESSION["message"] = "Please fill in both fields";
   } else {
-    submit($db);
+    submit($db, $_SESSION["users_id"]);
+    $_SESSION["message"] = "Note created";
   }
 }
 
@@ -23,10 +28,6 @@ if (isset($_POST["update"])) {
 
 if (isset($_POST["delete"])) {
   delete($db);
-}
-
-if (isset($_POST["deleteAll"])) {
-  deleteAll($db);
 }
 
 if (isset($_POST["complete"])) {

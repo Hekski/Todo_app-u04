@@ -3,7 +3,7 @@ include "../db/connect.php";
 include "login.functions.inc.php";
 
 // Fetching user data from login form
-if (isset($_POST["submit"])) {
+if (isset($_POST["login"])) {
   $uid = $_POST["uid"];
   $pwd = $_POST["pwd"];
 

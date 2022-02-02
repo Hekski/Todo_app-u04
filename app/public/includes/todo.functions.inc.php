@@ -11,22 +11,17 @@ function emptyInputSubmit($task, $tasktext)
   return $result;
 }
 
-// submit funktion for welcome page (Must fix: Doesnt send personal input to db)
+// Submit function for welcome page (Must fix: Doesnt send personal input to db)
 
-function submit($db)
+function submit($db, $id)
 {
   $task = $_POST["task"];
   $tasktext = $_POST["tasktext"];
 
-  if (empty($task)) {
-    header("Location: ../index.php?mess=error");
-  } elseif ($task && $tasktext) {
-    $stmt = $db->prepare(
-      "INSERT INTO tasklist (taskid, task, tasktext, completed) VALUES ('0','$task', '$tasktext', '0')"
-    );
-    $stmt->execute();
-    header("Location: ../index.php?mess=noted");
-  }
+  $stmt = $db->prepare(
+    "INSERT INTO tasklist (task, tasktext, taskid, completed) VALUES ('$task', '$tasktext', '$id', '0')"
+  );
+  $stmt->execute();
 }
 
 // Add new task to database with userID
@@ -89,22 +84,14 @@ function delete($db)
   }
 }
 
-// Delete all old thoughts (Must fix: Not working)
+// Delete all old thoughts
 
 function deleteAll($db)
 {
-  $stmt = $db->prepare("DELETE FROM tasklist WHERE completed = 1");
-
-  try {
-    $stmt->execute($stmt);
-  } catch (Exception $e) {
-    echo "Fel!" . $e->getMessage();
-  }
+  $query = "DELETE FROM tasklist WHERE completed = 1";
+  $stmt = $db->prepare($query);
+  $stmt->execute();
 }
-
-// Must fix - Move item up - Function for prioritizing
-
-// MMust fix - Move item down - Function for prioritizing
 
 // Print current thoughts
 
@@ -116,23 +103,20 @@ function printTasks($db)
   $stmt->execute();
   $result = $stmt->fetchAll();
 
-  $listNumber = 1;
-
   foreach ($result as $task) {
     if ($task["taskid"] == $_SESSION["users_id"]) {
-      $listitem = "<div class='listitem'>$listNumber<li><form method='POST' action='dodo.php'>
+      $listitem = "<div class='listitem'><li><form method='POST' action='dodo.php'>
             <input name='id' type='hidden' value='$task[id]'>
             <input class='input-task' name='task' type='text' value='$task[task]' placeholder='Thought...'><br>
             <input class='input-tasktext' name='tasktext' type='text' value='$task[tasktext]' placeholder='  And Insight...'><br>
-            <input class='submit' type='submit' name='update' value='Update'>
-            <input class='submit' type='submit' name='delete' value='Delete'>
-            <input class='submit' type='submit' name='complete' value='Complete'>
-            <input class='submit' type='button' name='moveUp' value='↑'>
-            <input class='submit' type='button' name='moveDown' value='↓'>
+            <input class='button' type='submit' name='update' value='Update'>
+            <input class='button' type='submit' name='delete' value='Delete'>
+            <input class='button' type='submit' name='complete' value='Complete'>
+            <input class='button' type='hidden' name='moveUp' value='↑'>
+            <input class='button' type='hidden' name='moveDown' value='↓'>
         </form>
         </li></div>";
       echo $listitem;
-      $listNumber++;
     }
   }
 }
@@ -149,10 +133,10 @@ function printCompletedTasks($db)
 
   foreach ($result as $task) {
     $listitem = "<li><form method='POST' action='completed.php'>
-            $listNumber<input name='id' type='hidden' value='$task[id]'>
+            <input name='id' type='hidden' value='$task[id]'>
             <input class='completed' name='task' type='text' value='$task[task]'>
             <input class='completed' name='tasktext' type='text' value='$task[tasktext]'>
-            <input class='submit' type='submit' name='delete' value='Delete'>
+            <input class='button' type='submit' name='delete' value='Delete'>
         </form>
         </li>";
     echo $listitem;

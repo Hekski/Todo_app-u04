@@ -1,5 +1,6 @@
 <?php
 // Login functions
+// Checking if login fields are empty
 
 function emptyInputLogin($uid, $pwd)
 {
@@ -8,39 +9,6 @@ function emptyInputLogin($uid, $pwd)
     $result = true;
   }
   return $result;
-}
-
-// Checking uid and fetching a users row of info from db
-
-function uidExists($db, $uid, $email)
-{
-  if (
-    !($stmt = $db->prepare(
-      "SELECT * FROM users WHERE users_uid = :users_uid OR users_uid = :users_email;"
-    ))
-  ) {
-    header("location: ../pages/signup.php?error=stmtfailed");
-    exit();
-  }
-
-  $stmt->execute(["users_uid" => $uid, "users_email" => $email]);
-  if ($row = $stmt->fetch()) {
-    return $row;
-  } else {
-    $result = false;
-    return $result;
-  }
-}
-
-// Get user id
-
-function getUserId()
-{
-  if (isset($_SESSION["users_id"])) {
-    $id = $_SESSION["users_id"];
-
-    return $id;
-  }
 }
 
 // Login and password functions
@@ -63,9 +31,43 @@ function login($db, $uid, $pwd)
     session_start();
     $_SESSION["users_id"] = $uidExists["users_id"];
     $_SESSION["users_uid"] = $uidExists["users_uid"];
+    $_SESSION["message"] = "";
     getUserId();
     header("location: ../index.php");
     exit();
+  }
+}
+
+// Checking uid and fetching a users row of info from db
+
+function uidExists($db, $uid, $email)
+{
+  if (
+    !($stmt = $db->prepare(
+      "SELECT * FROM users WHERE users_uid = :users_uid OR users_uid = :users_email;"
+    ))
+  ) {
+    header("location: ../index.php?error=stmtfailed");
+    exit();
+  }
+
+  $stmt->execute(["users_uid" => $uid, "users_email" => $email]);
+  if ($row = $stmt->fetch()) {
+    return $row;
+  } else {
+    $result = false;
+    return $result;
+  }
+}
+
+// Get user id
+
+function getUserId()
+{
+  if (isset($_SESSION["users_id"])) {
+    $id = $_SESSION["users_id"];
+
+    return $id;
   }
 }
 

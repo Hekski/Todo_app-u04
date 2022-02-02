@@ -9,16 +9,19 @@
 }
 
 .input-task {
-  width: 100%;
+  width: 96%;
   font-weight: bold;
   font-size: 2em;
-  background-color: transparent;
+  background-color: rgb(235, 235, 235);
   padding: 0.5em;
+  color: #ba6ee9;
 }
 
 .input-tasktext {
   width: 100%;
   background-color: transparent;
+  color: #ba6ee9;
+  margin-bottom: 12px;
 }
 
 .user_name {
@@ -29,8 +32,8 @@
   background-color: white;
   border-radius: 12px;
   margin-bottom: 14px;
-  padding: 4px;
-  filter: drop-shadow(10px 10px 10px #f0afea);
+  padding: 8px;
+  // filter: drop-shadow(10px 10px 10px #f0afea);
 }
 
 #newtask {

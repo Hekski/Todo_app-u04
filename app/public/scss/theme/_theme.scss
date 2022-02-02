@@ -1,33 +1,42 @@
 body {
-  background: rgb(219, 43, 200);
-  background: radial-gradient(
-    circle,
-    rgb(241, 97, 227) 0%,
-    rgba(255, 230, 255, 1) 48%,
-    rgba(0, 212, 255, 1) 100%
+  background: rgb(138, 56, 165);
+  background: linear-gradient(
+    0deg,
+    rgba(116, 123, 158, 1) 18%,
+    rgba(224, 139, 144, 1) 29%,
+    rgba(254, 211, 185, 1) 44%,
+    rgba(170, 214, 255, 1) 100%
   );
+
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+}
+
+::placeholder {
+  color: #b6b6b6;
 }
 
 h1 {
-  // color: white;
   font-size: 6em;
-  background: -webkit-linear-gradient(#eee, rgb(100, 142, 231));
+  background: -webkit-linear-gradient(340deg, #eee, rgb(126, 159, 231));
   -webkit-background-clip: text;
+  background-clip: none;
   -webkit-text-fill-color: transparent;
+  margin-block-end: 0.4em;
 }
 
 p {
   margin-top: 2px;
-  color: #3f7db5;
+  color: #f0f0f0;
 }
 
 .completed {
   background-color: #84bced;
   color: rgb(0, 0, 0);
+  height: 40px;
 }
 
 ul {
@@ -48,17 +57,5 @@ input {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: #3f7db5;
-}
-
-.moon {
-  opacity: 0.7;
-  margin-top: 1em;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 50px #fff, inset 20px 0 80px #f0f,
-    inset -20px 0 80px #0ff, inset 20px 0 300px #f0f, inset -20px 0 300px #0ff,
-    0 0 50px #fff, -10px 0 80px #f0f, 10px 0 80px #0ff;
-  z-index: -10;
+  color: #ebebeb;
 }
