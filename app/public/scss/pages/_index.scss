@@ -7,14 +7,24 @@
 }
 
 .input-task {
-  font-size: 4em;
+  font-size: 1.8em;
   font-family: inherit;
+  width: 100%;
+  padding-left: 6px;
+
+  @media (max-width: 750px) {
+    font-size: 1.4em;
+  }
 }
 
 .input-tasktext {
   font-size: 1.8em;
+  font-family: inherit;
   border: none;
   border-radius: 4px;
-  resize: none;
-  font-family: inherit;
+  width: 60%;
+
+  @media (max-width: 750px) {
+    font-size: 1em;
+  }
 }

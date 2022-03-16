@@ -12,9 +12,9 @@ session_start(); ?>
 </head>
 
 <nav>
-  <div class="nav">
+  <div>
     <!-- Top navigation -->
-    <ul>
+    <ul class="nav">
       <?php if (isset($_SESSION["users_id"])) {
         echo "<div class='navbar'><li><a href='\index.php'>Home</a></li>
               <li><a href='\dodo.php'>Thoughts</a></li>

@@ -1,10 +1,13 @@
-.nav {
-  width: 800px;
-  font-style: bolder;
+nav {
+  width: 80%;
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 }
 
 .navbar {
+  font-style: bolder;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }

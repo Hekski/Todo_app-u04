@@ -15,7 +15,7 @@ This was a school assignment to create a web app storing a todolist. It was made
 
 1. Clone this repo.
 2. From the root folder, with docker installed, run "docker compose up" in your terminal of choice.
-3. Access the page on 127.0.0.1.
+3. Access the page on 127.0.0.1:80.
 4. Access the database on 127.0.0.1:8080 (login is in the .yml-file)
 5. Import and upload the db.sql file into the database.
 6. Open the browser and sign up to get login credentials.

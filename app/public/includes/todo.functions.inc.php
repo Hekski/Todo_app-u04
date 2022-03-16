@@ -108,7 +108,7 @@ function printTasks($db)
       $listitem = "<div class='listitem'><li><form method='POST' action='dodo.php'>
             <input name='id' type='hidden' value='$task[id]'>
             <input class='input-task' name='task' type='text' value='$task[task]' placeholder='Thought...'><br>
-            <input class='input-tasktext' name='tasktext' type='text' value='$task[tasktext]' placeholder='  And Insight...'><br>
+            <textarea class='input-tasktext' name='tasktext' type='text' value='$task[tasktext]' placeholder='  And Insight...'></textarea>
             <input class='button' type='submit' name='update' value='Update'>
             <input class='button' type='submit' name='delete' value='Delete'>
             <input class='button' type='submit' name='complete' value='Complete'>
