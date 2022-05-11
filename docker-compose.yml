@@ -17,13 +17,11 @@ services:
 
   adminer:
     image: adminer:latest
-    environment:
-      ADMINER_DEFAULT_SERVER: mariadb
     restart: always
     ports:
       - 8080:8080
 
-  mariadb:
+  mysql:
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: "test1234"
@@ -32,8 +30,6 @@ services:
       MYSQL_DATABASE: "henrikdb"
     volumes:
       - mysqldata:/var/lib/mysql
-    ports:
-      - 3306:3306
 
 volumes:
   mysqldata: {}
