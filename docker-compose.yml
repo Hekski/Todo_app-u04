@@ -15,20 +15,25 @@ services:
     volumes:
       - ./app:/app
 
-  mysql:
-    image: mariadb:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: "secret"
-      MYSQL_USER: "henrik"
-      MYSQL_PASSWORD: "secret"
-      MYSQL_DATABASE: "henrikdb"
-    volumes:
-      - mysqldata:/var/lib/mysql
-
   adminer:
     image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: mariadb
     restart: always
     ports:
       - 8080:8080
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "test1234"
+      MYSQL_USER: "henrik"
+      MYSQL_PASSWORD: "test1234"
+      MYSQL_DATABASE: "henrikdb"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - 3306:3306
+
 volumes:
   mysqldata: {}
