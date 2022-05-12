@@ -153,20 +153,12 @@ nav {
 }
 
 body {
-  background: repeating-linear-gradient(to right, transparent 0 calc(50px - 2px), #2c4966 calc(50px - 2px) 50px), repeating-linear-gradient(to bottom, transparent 0 calc(50px - 2px), #2c4966 calc(50px - 2px) 50px) #395c7e;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  background: url(../../images/Papers.co-ns97-rainbow-mountain-color-nature-android-large.jpg);
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Do not repeat the image */
+  background-size: cover;
 }
 
 .wrapper {
